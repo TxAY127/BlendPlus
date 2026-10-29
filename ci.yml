@@ -1,0 +1,25 @@
+name: Build and test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build, test and package
+        shell: powershell
+        run: ./scripts/Package.ps1
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: BlendPlus-packages
+          path: |
+            artifacts/*-windows.zip
+            artifacts/*-source.zip
+            artifacts/SHA256SUMS.txt
+          if-no-files-found: error
