@@ -1,0 +1,24 @@
+
+    // BlendPlus menu limiter: unsigned QML extension, no signed binary changes.
+    Timer {
+        interval: 250; running: true; repeat: true
+        onTriggered: {
+            try {
+                var window = rootItem.Window.window;
+                if (!window) return;
+                while (window.transientParent) window = window.transientParent;
+                var content = window.contentItem;
+                if (!content) return;
+                for (var i = 0; i < content.children.length; ++i) {
+                    if (content.children[i].objectName === "__BlendPlusMenuLimiter") { running = false; return; }
+                }
+                var component = Qt.createComponent("BlendPlusMenuLimiter.qml");
+                if (component.status === Component.Ready) {
+                    var helper = component.createObject(content);
+                    if (helper) running = false;
+                } else if (component.status === Component.Error) {
+                    console.warn("BlendPlus: " + component.errorString()); running = false;
+                }
+            } catch (ignored) { running = false; }
+        }
+    }

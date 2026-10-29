@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+    <ProjectGuid>{5E028FD8-29C7-4C26-9AB2-8AC6A4BA9FD2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BlendPlus</RootNamespace>
+    <AssemblyName>BlendPlus</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <OutputPath>..\..\artifacts\bin\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Optimize>true</Optimize>
+    <Deterministic>true</Deterministic>
+    <StartupObject>MainForm</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Web.Extensions" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BlendPlus.cs" />
+    <Compile Include="MenuExtension.cs" />
+    <EmbeddedResource Include="..\..\assets\menu-hook.txt"><LogicalName>menu-hook.txt</LogicalName></EmbeddedResource>
+    <EmbeddedResource Include="..\..\assets\previous-menu-hook.txt"><LogicalName>previous-menu-hook.txt</LogicalName></EmbeddedResource>
+    <EmbeddedResource Include="..\..\assets\BlendPlusMenuLimiter.qml"><LogicalName>BlendPlusMenuLimiter.qml</LogicalName></EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

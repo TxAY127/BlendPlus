@@ -1,0 +1,22 @@
+    // BlendPlus menu hook v2
+    Timer {
+        interval: 400; running: true; repeat: true
+        onTriggered: {
+            try {
+                var owner = rootItem.Window.window;
+                if (!owner) return;
+                while (owner.transientParent) owner = owner.transientParent;
+                var content = owner.contentItem;
+                if (!content) return;
+                for (var i = 0; i < content.children.length; ++i) {
+                    if (content.children[i].objectName === "__BlendPlusMenuLimiter") { running = false; return; }
+                }
+                var component = Qt.createComponent(Qt.resolvedUrl("BlendPlusMenuLimiter.qml"));
+                if (component.status === Component.Ready) {
+                    if (component.createObject(content)) running = false;
+                } else if (component.status === Component.Error) {
+                    console.warn("BlendPlus menu: " + component.errorString()); running = false;
+                }
+            } catch (error) { console.warn("BlendPlus menu: " + error); running = false; }
+        }
+    }
