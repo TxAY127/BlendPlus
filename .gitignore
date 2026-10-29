@@ -1,0 +1,22 @@
+/artifacts/
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+*.exe
+*.dll
+*.pdb
+*.zip
+*.log
+Thumbs.db
+.DS_Store
+
+# Never commit local backups, installations, media, or exploratory work.
+/work/
+/outputs/
+/Backups/
+installations.json
+*.aep
+*.mp4
+*.mov
